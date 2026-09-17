@@ -28,6 +28,21 @@ def inside(head):
     """Return True if head inside boundaries."""
     return -200 < head.x < 190 and -200 < head.y < 190
 
+def randomColor(randomNum):
+    randomColor = ''
+    match randomNum:
+        case 0:
+            randomColor = 'blue'
+        case 1:
+            randomColor = 'black'
+        case 2:
+            randomColor = 'green'
+        case 3:
+            randomColor = 'gold1'
+        case 4:
+            randomColor = 'lightGreen'
+
+    return randomColor
 
 def move():
     """Move snake forward one segment."""
@@ -50,10 +65,15 @@ def move():
 
     clear()
 
-    for body in snake:
-        square(body.x, body.y, 9, 'black')
+    randomNum = randrange(0,5,1)
 
-    square(food.x, food.y, 9, 'green')
+    for body in snake:
+        square(body.x, body.y, 9, randomColor(randomNum))
+    if randomNum == 4:
+        randomNum -= 1
+    else:
+        randomNum +=1
+    square(food.x, food.y, 9, randomColor(randomNum))
     update()
     ontimer(move, 100)
 
